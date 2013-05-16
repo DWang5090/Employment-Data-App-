@@ -1,7 +1,6 @@
-HackaThon
+Employment Data App
 =========
 
-hackathon projects
 Employment Data App
 
 This is an Employment Data App. This project is a work in progress and it was created during the Hackathon. 
