@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Test</title>
+        <script type="text/javascript" src="d3.v3.js"></script>
+  	<style type = "text/css">
+			div.bar {
+					display: inline-block;
+					width: 20px;
+					height: 75px;   /* We'll override this later */
+					margin-right: 2px;
+					background-color: teal;
+			}
+			.axis path,
+			.axis line {
+				fill: none;
+				stroke: black;
+				shape-rendering: crispEdges;
+			}
+
+			.axis text {
+				font-family: sans-serif;
+				font-size: 11px;
+			}
+
+			.chart rect {
+				stroke: white;
+				fill: steelblue;
+			}
+			
+			div.tooltip {   
+			  position: absolute;           
+			  text-align: center;           
+			  width: 60px;                  
+			  height: 28px;                 
+			  padding: 2px;             
+			  font: 12px sans-serif;        
+			  background: lightsteelblue;   
+			  border: 0px;      
+			  border-radius: 8px;           
+			  pointer-events: none;         
+			}
+		</style>
+    </head>
+    <body>
+		<div id="viz"></div>
+        <script type="text/javascript">			  
+			var dataset = [{
+				"name": "Altres Medical",
+				"annual_sales": "40000000"
+			},
+			{
+				"name": "Kapiolani Medical Ctr",
+				"annual_sales": "530000000"
+			},
+			{
+				"name": "Kyo-Ya Co Ltd"
+			},
+			{
+				"name": "Queen's Medical Ctr",
+				"annual_sales": "696500000"
+			},
+			{
+				"name": "Hawaii Health Systems Corp"
+			},
+			{
+				"name": "Tripler Army Medical Ctr",
+				"annual_sales": "299556000"
+			},
+			{
+				"name": "Bank of Hawaii"
+			},
+			{
+				"name": "St Francis Healthcare System",
+				"annual_sales": "113400000"
+			},
+			{
+				"name": "Bank of Hawaii Corp"
+			},
+			{
+				"name": "Aeko Kula Inc"
+			},
+			{
+				"name": "Kaiser Permanente Medical",
+				"annual_sales": "212000000"
+			},
+			{
+				"name": "Straub Clinic & Hospital",
+				"annual_sales": "201400000"
+			},
+			{
+				"name": "Oahu Transit Svc Inc",
+				"annual_sales": "136724000"
+			},
+			{
+				"name": "Polynesian Cultural Ctr",
+				"annual_sales": "38100000"
+			},
+			{
+				"name": "Outrigger Enterprises Group"
+			},
+			{
+				"name": "Hilton-Hawaiian Village Beach",
+				"annual_sales": "160500000"
+			},
+			{
+				"name": "Honolulu Intl AIRPORT-HNL"
+			},
+			{
+				"name": "Roberts Overnighters",
+				"annual_sales": "134400000"
+			},
+			{
+				"name": "Adjutant General"
+			},
+			{
+				"name": "Kuakini Emergency Svc",
+				"annual_sales": "137800000"
+			},
+			{
+				"name": "Sheraton-Waikiki",
+				"annual_sales": "58800000"
+			},
+			{
+				"name": "Kapi'olani Health",
+				"annual_sales": "174000000"
+			},
+			{
+				"name": "Kaimuki Toyota/Suzuki",
+				"annual_sales": "1030800000"
+			},
+			{
+				"name": "Servco Pacific Inc",
+				"annual_sales": "147400000"
+			},
+			{
+				"name": "Royal Hawaiian Waikiki",
+				"annual_sales": "2205000"
+			},
+			{
+				"name": "Sheraton Princess Kaiulani",
+				"annual_sales": "34300000"
+			},
+			{
+				"name": "Hawaii Medical Svc Assn",
+				"annual_sales": "219000000"
+			},
+			{
+				"name": "Servco Mapunapuna Plaza",
+				"annual_sales": "327000000"
+			},
+			{
+				"name": "Honolulu Environmental Svc"
+			},
+			{
+				"name": "Thomas Hale Hamilton Library"
+			},
+			{
+				"name": "Castle Medical Ctr"
+			},
+			{
+				"name": "Pali Momi Medical Ctr",
+				"annual_sales": "95400000"
+			},
+			{
+				"name": "Hale Koa Hotel",
+				"annual_sales": "96300000"
+			},
+			{
+				"name": "Hyatt Regency-Waikiki Resort",
+				"annual_sales": "41650000"
+			},
+			{
+				"name": "Halekulani-Orchids",
+				"annual_sales": "75000000"
+			},
+			{
+				"name": "Hawaii Newspaper Agency Inc",
+				"annual_sales": "139200000"
+			},
+			{
+				"name": "Clinical Laboratories-Hawaii",
+				"annual_sales": "154400000"
+			},
+			{
+				"name": "Hawaiian Telcom Inc"
+			},
+			{
+				"name": "Westin Moana Surfrider",
+				"annual_sales": "36750000"
+			},
+			{
+				"name": "Hawaiian Building Maintenance",
+				"annual_sales": "31500000"
+			},
+			{
+				"name": "Waianae Coast Co Health Ctr",
+				"annual_sales": "74200000"
+			},
+			{
+				"name": "Avon District Manager",
+				"annual_sales": "93800000"
+			},
+			{
+				"name": "J W Marriott-Ihilani Resort",
+				"annual_sales": "19600000"
+			},
+			{
+				"name": "Times Super Market",
+				"annual_sales": "160550000"
+			},
+			{
+				"name": "Marriott-Waikiki Beach",
+				"annual_sales": "67410000"
+			},
+			{
+				"name": "Shirokiya",
+				"annual_sales": "57200000"
+			},
+			{
+				"name": "Costco",
+				"annual_sales": "97200000"
+			},
+			{
+				"name": "Punahou School"			
+			},
+			{
+				"name": "Oahu Community Correctional"
+			},
+			{
+				"name": "Diagnostic Laboratory Svc Inc"
+			}];
+			var nameDataSet = [];			
+			var saleDataSet = [];
+			for(i = 0; i < 50; i++){
+				if(dataset[i].annual_sales != null){
+					nameDataSet.push(dataset[i].name);					
+					var number = Math.round(((dataset[i].annual_sales)/1030800000) * 100);
+					saleDataSet.push(number);			
+				}
+			}
+			var div = d3.select("body").append("div")   
+						.attr("class", "tooltip")               
+						.style("opacity", 0);
+			var x = d3.scale.linear()
+					  .domain([0, d3.max(saleDataSet)])
+					  .range([0, 420])
+			var y = d3.scale.ordinal()
+					  .domain(saleDataSet)
+					  .rangeBands([0, 620]);	
+			var chart = d3.select("body").append("svg")
+						  .attr("class", "chart")
+						  .attr("width", 440)
+						  .attr("height", 640)
+					      .append("g")
+						  .attr("transform", "translate(10,15)");
+
+			chart.selectAll("rect")
+			.data(saleDataSet)
+			.enter().append("rect")
+			.attr("y", y)
+			.attr("width", x)
+			.attr("height", y.rangeBand());
+			
+			chart.selectAll("rect")
+				 .data(dataset)
+				 .on("mouseover", function(d) {      
+						div.transition()        
+							.duration(200)      
+							.style("opacity", .9);      
+						div .html(d.name + "<br/>" + d.annual_sales)  
+                .style("left", (d3.event.pageX) + "px")     
+                .style("top", (d3.event.pageY - 28) + "px");    
+				})                  
+				.on("mouseout", function(d) {       
+						div.transition()        
+							.duration(500)      
+							.style("opacity", 0);   
+				});
+				
+			chart.selectAll("text")
+			.data(saleDataSet)
+			.enter().append("text")
+			.attr("x", x)
+			.attr("y", function(d) { return y(d) + y.rangeBand() / 2; })
+			.attr("dx", -3) // padding-right
+			.attr("dy", ".35em") // vertical-align: middle
+			.attr("text-anchor", "end") // text-align: right
+			.text(String);
+
+			chart.selectAll("line")
+  				 .data(x.ticks(10))
+			     .enter().append("line")
+				 .attr("x1", x)
+				 .attr("x2", x)
+				 .attr("y1", 0)
+				 .attr("y2", 640)
+				 .style("stroke", "#ccc");
+
+			chart.selectAll(".rule")
+				.data(x.ticks(10))
+				.enter().append("text")
+				.attr("class", "rule")
+				.attr("x", x)
+				.attr("y", 0)
+				.attr("dy", -3)
+				.attr("text-anchor", "middle")
+				.text(String);
+			
+			chart.append("line")
+				 .attr("y1", 0)
+				 .attr("y2", 640)
+				 .style("stroke", "#000");
+
+        </script>
+    </body>
+</html> 
