@@ -15,11 +15,13 @@ jobs but want to find a company that does well, can last long, and is convienent
 Technologies Used
 d3 = a JavaScript library that produces data visualization documents
 ArcGis = A web application that allows people to make maps using geographical data from other resources
+  Link to the web app: http://www.arcgis.com/apps/OnePane/basicviewer/index.html?appid=cce80e8d4a054b748682704a47f6084f
+  Note: If the link does not work, there is also a print screen of the web app in the repository.
 
 Data Used
-Top 50 Employers in Honolulu County
-Top 50 Employers in Maui County
-Top 50 Employers in Hawaii County
+Top 50 Employers in Honolulu County: https://data.hawaii.gov/Employment/Top-50-Employers-Honolulu-County/jkm3-epq4
+Top 50 Employers in Maui County: https://data.hawaii.gov/Employment/Top-50-Employers-Maui-County/9i8q-bgfy
+Top 50 Employers in Hawaii County: https://data.hawaii.gov/Employment/Top-50-Employers-Hawaii-County/gphu-34y5
 
 Author 
 David Wang
